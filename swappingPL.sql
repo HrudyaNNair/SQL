@@ -1,0 +1,12 @@
+ DECLARE
+  2  A NUMBER:=&A;
+  3  B NUMBER:=&B;
+  4  C NUMBER;
+  5  BEGIN
+  6  DBMS_OUTPUT.PUT_LINE('BEFORE SWAPPING A ='||A||'B='||B);
+  7  C:=A;
+  8  A:=B;
+  9  B:=C;
+ 10  DBMS_OUTPUT.PUT_LINE('AFTER SWAPPING A ='||A||'B='||B);
+ 11  END;
+ 12  /
