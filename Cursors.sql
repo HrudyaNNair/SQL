@@ -19,3 +19,27 @@ END LOOP;
 CLOSE ECUR;
 END;
 /
+
+----------------------------------------------------------------------------------------------------------------------------
+
+SELECT * FROM INCSAL;
+
+----------------------------------------------------------------------------------------------------------------------------
+--Repeat exercise1 by reading department no inter relatively from the user--
+
+DECLARE
+CURSOR ECUR(V_DNO EMPLOYEE.ID%TYPE) IS SELECT ID,NAME,BASIC FROM EMPLOYEE WHERE DEPTID=V_DNO;
+NID EMPLOYEE.ID%TYPE;
+NNAME EMPLOYEE.NAME%TYPE;
+NSAL EMPLOYEE.BASIC%TYPE;
+BEGIN
+OPEN ECUR(&D_NO);
+LOOP
+FETCH ECUR INTO NID,NNAME,NSAL;
+EXIT WHEN(ECUR%NOTFOUND);
+UPDATE EMPLOYEE SET BASIC=BASIC+1000 WHERE ID=NID;
+INSERT INTO INCSAL2 VALUES(NID,NNAME,NSAL,NSAL+1000);
+END LOOP;
+CLOSE ECUR;
+END;
+/
