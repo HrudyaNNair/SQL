@@ -24,6 +24,11 @@ END;
 
 SELECT * FROM INCSAL;
 
+------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE INCSAL1(ID NUMBER PRIMARY KEY,NAME
+VARCHAR2(15),OLD_SAL NUMBER,NEW_SAL NUMBER);
+
 ----------------------------------------------------------------------------------------------------------------------------
 --Repeat exercise1 by reading department no inter relatively from the user--
 
