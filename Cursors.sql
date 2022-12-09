@@ -68,7 +68,7 @@ END LOOP;
 END;
 /
 
--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Create a cursor to display the highest five salaries of the employee table--
 
 DECLARE
@@ -80,6 +80,29 @@ LOOP
 FETCH C INTO S;
 DBMS_OUTPUT.PUT_LINE(S);
 EXIT WHEN(C%ROWCOUNT=5);
+END LOOP;
+CLOSE C;
+END;
+/
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Use a SQL cursor attribute to display the message ‘NO SUCH DEPARTMENT IDs’ when a user is trying to update the salary of employees for a department which does not exists--
+
+DECLARE
+CURSOR C(D_NUM EMPLOYEE.DEPTID%TYPE) IS SELECT DEPTID FROM EMPLOYEE GROUP BY DEPTID HAVING DEPTID=D_NUM;
+V_DNO EMPLOYEE.DEPTID%TYPE;
+BEGIN
+OPEN C(&D_NO);
+LOOP
+FETCH C INTO V_DNO;
+IF(C%FOUND) THEN
+UPDATE EMPLOYEE SET BASIC=BASIC+1000 WHERE DEPTID=V_DNO;
+EXIT;
+ELSE
+DBMS_OUTPUT.PUT_LINE('NO SUCH DEPARTMENT EXISTS');
+EXIT;
+END IF;
 END LOOP;
 CLOSE C;
 END;
