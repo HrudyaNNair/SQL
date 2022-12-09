@@ -67,3 +67,20 @@ VALUES(EMP_REC.ID,EMP_REC.NAME,EMP_REC.BASIC,EMP_REC.BASIC+1000);
 END LOOP;
 END;
 /
+
+-------------------------------------------------------------------------------------------------------------------------
+--Create a cursor to display the highest five salaries of the employee table--
+
+DECLARE
+CURSOR C IS SELECT BASIC FROM EMPLOYEE ORDER BY BASIC DESC;
+S NUMBER;
+BEGIN
+OPEN C;
+LOOP
+FETCH C INTO S;
+DBMS_OUTPUT.PUT_LINE(S);
+EXIT WHEN(C%ROWCOUNT=5);
+END LOOP;
+CLOSE C;
+END;
+/
