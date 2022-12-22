@@ -134,3 +134,15 @@ END;
 SELECT * FROM EMPLOYEE;
 
 ----------------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION DEPTHIGHEST(DNUM IN NUMBER)
+RETURN NUMBER
+IS
+SAL EMPLOYEE.BASIC%TYPE;
+BEGIN
+SELECT MAX(BASIC)INTO SAL FROM EMPLOYEE GROUP BY DEPTID HAVING EMPLOYEE.DEPTID=DNUM;
+RETURN SAL;
+END;
+/
+------------------------------------------------------------------------------------------------------------------------
+
